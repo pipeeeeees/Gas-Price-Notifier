@@ -14,18 +14,14 @@ from email.message import EmailMessage
 import smtplib
 import os
 
-gmail_user = os.environ.get('GMAIL_USER')
-gmail_pass = os.environ.get('GMAIL_PASS')
 
 def sendEmail(recipient, subject, message):
-    global gmail_user
-    global gmail_pass
     # creates SMTP session
     s = smtplib.SMTP('smtp.gmail.com', 587)
     # start TLS for security
     s.starttls()
     # Authentication
-    s.login(gmail_user, gmail_pass)
+    s.login(str(os.environ.get('GMAIL_USER')), str(os.environ.get('GMAIL_PASS')))
     msg = EmailMessage()
     msg.set_content(message)
     msg['Subject'] = subject
