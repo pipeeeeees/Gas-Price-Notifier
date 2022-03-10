@@ -52,7 +52,7 @@ def dadUpdate():
     Links:
     Home QT: https://www.gasbuddy.com/station/146644
     Home Raceway: https://www.gasbuddy.com/station/71747""".format(gbscraper.getPrice(homeQT,'midgrade'),gbscraper.getPrice(homeRaceway,'midgrade'))
-    emailer.sendEmail('pipesda@gmail.com',subject,message)
+    emailer.sendEmail('pipesda@yahoo.com',subject,message)
 
 def main():
     dpipesUpdate()
