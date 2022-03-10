@@ -13,6 +13,7 @@ Created:    3/8/2022
 from email.message import EmailMessage
 import smtplib
 import os
+import credentials
 
 
 def sendEmail(recipient, subject, message):
