@@ -14,6 +14,7 @@ Created:    3/8/2022
 import requests
 import time
 
+
 #home QT
 #https://www.gasbuddy.com/station/146644
 #home raceway
@@ -35,13 +36,19 @@ def getPrice(url,grade):
         'premium'
         'diesel'
     """
-    #url = 'https://www.gasbuddy.com/station/197744'
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-    result = requests.get(url, headers=headers)
-    htmlstring = str(result.content.decode())
-    parselist = htmlstring.split('<span class="text__xl___2MXGo text__bold___1C6Z_ text__left___1iOw3 FuelTypePriceDisplay-module__price___3iizb">')
-    parselist.pop(0)
-    time.sleep(5)
+    parselist = []
+    cntr = 0
+    while len(parselist) == 0:
+        #url = 'https://www.gasbuddy.com/station/197744'
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+        result = requests.get(url, headers=headers)
+        htmlstring = str(result.content.decode())
+        parselist = htmlstring.split('<span class="text__xl___2MXGo text__bold___1C6Z_ text__left___1iOw3 FuelTypePriceDisplay-module__price___3iizb">')
+        parselist.pop(0)
+        time.sleep(5)
+        cntr = cntr + 1
+        if cntr >= 20:
+            return 'ERROR, HTML SOURCE CODE CHANGED'
     #at this point, we should have all prices
     try:
         if len(parselist) == 4:
